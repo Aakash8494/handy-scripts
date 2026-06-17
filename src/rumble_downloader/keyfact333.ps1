@@ -4,12 +4,12 @@ python -m yt_dlp `
     --merge-output-format mkv `
     --playlist-end 40 `
     --concurrent-fragments 4 `
-    --download-archive sahajtloi_archive.txt `
+    --download-archive KEYFACTS33.txt `
     -o "%(uploader)s/%(upload_date)s - %(title)s [%(id)s].%(ext)s" `
     --embed-thumbnail `
     --convert-thumbnails jpg `
     --embed-metadata `
-    "https://www.youtube.com/@sahajtloi/videos"
+    "https://www.youtube.com/@KEYFACTS33/videos"
 
 
 # single video download

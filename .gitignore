@@ -39,3 +39,6 @@ src/youtube_transcript_download/*
 !src/youtube_transcript_download/*.py
 !src/youtube_transcript_download/*.txt
 !src/youtube_transcript_download/*.js
+
+*.mp4
+*.mkv

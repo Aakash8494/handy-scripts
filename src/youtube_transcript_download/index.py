@@ -66,9 +66,11 @@ def download_transcript(video_url, languages):
             [t.text if hasattr(t, "text") else t["text"] for t in transcript]
         )
 
-        # 2. Save the Transcript Text File
+        # 2. Save the Transcript Text File (Modified to include the title at the top)
         transcript_path = os.path.join(safe_channel, f"{safe_title}.txt")
         with open(transcript_path, "w", encoding="utf-8") as f:
+            f.write(f"{title}\n")
+            f.write("=" * len(title) + "\n\n") # Adds a nice underline matching the title length
             f.write(text)
 
         # 3. Create the Browser Shortcut

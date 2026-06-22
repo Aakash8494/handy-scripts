@@ -1,7 +1,7 @@
 import os
 import sys
 import argparse
-from ap_core import (
+from archive.AP.ap_core import (
     parse_url_parts,
     ensure_dir,
     download_with_ffmpeg,

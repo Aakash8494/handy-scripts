@@ -28,7 +28,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Attempt to import ap_core; handle error if missing
 try:
-    from ap_core import (
+    from archive.AP.ap_core import (
         create_black_video,
         create_black_video_from_audio,
     )

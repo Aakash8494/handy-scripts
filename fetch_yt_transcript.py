@@ -55,8 +55,12 @@ def download_transcript(video_url, languages):
     safe_title = sanitize_filename(title)
     safe_channel = sanitize_filename(channel)
 
-    # 1. Create the Channel Folder
-    os.makedirs(safe_channel, exist_ok=True)
+    # 1. Define Base Directory and Create the Channel Folder
+    base_dir = os.path.join("downloads", "YT_Transcripts")
+    channel_path = os.path.join(base_dir, safe_channel)
+    
+    # exist_ok=True ensures it creates intermediate directories like 'downloads' if missing
+    os.makedirs(channel_path, exist_ok=True)
 
     try:
         print(f"Downloading transcript for: '{title}'...")
@@ -66,23 +70,22 @@ def download_transcript(video_url, languages):
             [t.text if hasattr(t, "text") else t["text"] for t in transcript]
         )
 
-        # 2. Save the Transcript Text File (Modified to include the title at the top)
-        transcript_path = os.path.join(safe_channel, f"{safe_title}.txt")
+        # 2. Save the Transcript Text File
+        transcript_path = os.path.join(channel_path, f"{safe_title}.txt")
         with open(transcript_path, "w", encoding="utf-8") as f:
             f.write(f"{title}\n")
             f.write("=" * len(title) + "\n\n") # Adds a nice underline matching the title length
             f.write(text)
 
         # 3. Create the Browser Shortcut
-        create_url_shortcut(safe_channel, safe_title, video_id)
+        create_url_shortcut(channel_path, safe_title, video_id)
 
-        print(f"✅ Success! Saved to folder: ./{safe_channel}/")
+        print(f"✅ Success! Saved to folder: ./{channel_path}/")
         print(f"📄 Transcript: {safe_title}.txt")
         print(f"🔗 Shortcut: {safe_title}.url")
 
     except Exception as e:
         print("❌ Error fetching transcript:", e)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download YouTube transcript")

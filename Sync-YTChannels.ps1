@@ -1,17 +1,18 @@
 # 1. Define your main root download folder
-$BaseDownloadFolder = "C:\Users\aakas\Downloads\YTDL_Downloads"
+$BaseDownloadFolder = "C:\Users\aakas\Downloads\YT_Downloads"
 
 # 2. List of channels with their custom playlist-end limits
 $channels = @(
+    # @{ Url = "https://rumble.com/c/TateSpeech"; PlaylistEnd = 40 },
+    # @{ Url = ""; PlaylistEnd = 20 },
+    # @{ Url = ""; PlaylistEnd = 20 },
     @{ Url = "https://www.youtube.com/@bettermanadvice"; PlaylistEnd = 40 },
     @{ Url = "https://www.youtube.com/@KEYFACTS33"; PlaylistEnd = 10 },
     @{ Url = "https://www.youtube.com/@mind_change12"; PlaylistEnd = 20 },
     @{ Url = "https://www.youtube.com/@sahajtloi"; PlaylistEnd = 20 },
     @{ Url = "https://www.youtube.com/@snagar86"; PlaylistEnd = 5 },
     @{ Url = "https://www.youtube.com/@IronWilll2026"; PlaylistEnd = 20 },
-    @{ Url = "https://rumble.com/c/TateSpeech"; PlaylistEnd = 50 },
-
-    
+    @{ Url = "https://www.youtube.com/@XHumanBehaviour"; PlaylistEnd = 50 }
 )
 
 # 3. Loop through each channel block

@@ -55,11 +55,11 @@ def download_transcript(video_url, languages):
     safe_title = sanitize_filename(title)
     safe_channel = sanitize_filename(channel)
 
-    # 1. Define Base Directory and Create the Channel Folder
-    base_dir = os.path.join("downloads", "YT_Transcripts")
+    # 1. Hardcode the exact Windows absolute path
+    base_dir = r"C:\Users\aakas\Downloads\YT_Transcripts"
     channel_path = os.path.join(base_dir, safe_channel)
     
-    # exist_ok=True ensures it creates intermediate directories like 'downloads' if missing
+    # exist_ok=True ensures it creates intermediate directories if missing
     os.makedirs(channel_path, exist_ok=True)
 
     try:
@@ -80,7 +80,7 @@ def download_transcript(video_url, languages):
         # 3. Create the Browser Shortcut
         create_url_shortcut(channel_path, safe_title, video_id)
 
-        print(f"✅ Success! Saved to folder: ./{channel_path}/")
+        print(f"✅ Success! Saved to folder: {channel_path}")
         print(f"📄 Transcript: {safe_title}.txt")
         print(f"🔗 Shortcut: {safe_title}.url")
 

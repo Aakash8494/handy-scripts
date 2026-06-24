@@ -15,20 +15,20 @@
         //         "panel": "new"
         //     }
         // },
-        {
-            "label": "Terminal 2: YouTube",
-            "type": "shell",
-            "command": "powershell",
-            "args": [
-                "-NoExit",
-                "-Command",
-                "& .\\venv\\Scripts\\Activate.ps1; cd src\\youtube_transcript_download; py index.py"
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
-            }
-        },
+        // {
+        //     "label": "Terminal 2: YouTube",
+        //     "type": "shell",
+        //     "command": "powershell",
+        //     "args": [
+        //         "-NoExit",
+        //         "-Command",
+        //         "& .\\venv\\Scripts\\Activate.ps1; cd src\\youtube_transcript_download; py index.py"
+        //     ],
+        //     "presentation": {
+        //         "reveal": "always",
+        //         "panel": "new"
+        //     }
+        // },
         // {
         //     "label": "Terminal 3: Video to Audio",
         //     "type": "shell",
@@ -43,18 +43,18 @@
         //         "panel": "new"
         //     }
         // },
-        {
-            "label": "Launch All Terminals",
-            "dependsOn": [
-                // "Terminal 1: MP3",
-                "Terminal 2: YouTube",
-                // "Terminal 3: Video to Audio"
-            ],
-            "dependsOrder": "parallel",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
+        // {
+        //     "label": "Launch All Terminals",
+        //     "dependsOn": [
+        //         // "Terminal 1: MP3",
+        //         "Terminal 2: YouTube",
+        //         // "Terminal 3: Video to Audio"
+        //     ],
+        //     "dependsOrder": "parallel",
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     }
+        // }
     ]
 }

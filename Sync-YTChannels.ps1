@@ -7,15 +7,15 @@ $channels = @(
     # @{ Url = ""; PlaylistEnd = 20 },
     # @{ Url = ""; PlaylistEnd = 20 },
     # @{ Url = ""; PlaylistEnd = 20 },
-    # @{ Url = ""; PlaylistEnd = 20 },
+    @{ Url = "https://www.youtube.com/@Rational_Mishra"; PlaylistEnd = 20 },
     @{ Url = "https://www.youtube.com/@EntrepreneursInCars"; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@bettermanadvice"; PlaylistEnd = 40 },
+    @{ Url = "https://www.youtube.com/@bettermanadvice"; PlaylistEnd = 20 },
     @{ Url = "https://www.youtube.com/@KEYFACTS33"; PlaylistEnd = 10 },
     @{ Url = "https://www.youtube.com/@mind_change12"; PlaylistEnd = 20 },
     @{ Url = "https://www.youtube.com/@sahajtloi"; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@snagar86"; PlaylistEnd = 5 },
+    # @{ Url = "https://www.youtube.com/@snagar86"; PlaylistEnd = 5 },
     @{ Url = "https://www.youtube.com/@IronWilll2026"; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@XHumanBehaviour"; PlaylistEnd = 50 }
+    @{ Url = "https://www.youtube.com/@XHumanBehaviour"; PlaylistEnd = 20 }
 )
 
 # 3. Loop through each channel block

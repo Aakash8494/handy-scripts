@@ -6,16 +6,16 @@ $channels = @(
     # @{ Url = "https://rumble.com/c/TateSpeech"; PlaylistEnd = 40 },
     # @{ Url = ""; PlaylistEnd = 20 },
     # @{ Url = ""; PlaylistEnd = 20 },
-    # @{ Url = ""; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@Rational_Mishra"; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@EntrepreneursInCars"; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@bettermanadvice"; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@KEYFACTS33"; PlaylistEnd = 10 },
-    @{ Url = "https://www.youtube.com/@mind_change12"; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@sahajtloi"; PlaylistEnd = 20 },
+    @{ Url = "https://www.youtube.com/@Sirhud"; PlaylistEnd = 100 },
+    # @{ Url = "https://www.youtube.com/@EntrepreneursInCars"; PlaylistEnd = 20 },
+    # @{ Url = "https://www.youtube.com/@bettermanadvice"; PlaylistEnd = 20 },
+    # @{ Url = "https://www.youtube.com/@KEYFACTS33"; PlaylistEnd = 10 },
+    # @{ Url = "https://www.youtube.com/@mind_change12"; PlaylistEnd = 20 },
+    # @{ Url = "https://www.youtube.com/@sahajtloi"; PlaylistEnd = 20 },
     # @{ Url = "https://www.youtube.com/@snagar86"; PlaylistEnd = 5 },
-    @{ Url = "https://www.youtube.com/@IronWilll2026"; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@XHumanBehaviour"; PlaylistEnd = 20 }
+    # @{ Url = "https://www.youtube.com/@IronWilll2026"; PlaylistEnd = 20 },
+    # @{ Url = "https://www.youtube.com/@XHumanBehaviour"; PlaylistEnd = 20 }
+    @{ Url = "https://www.youtube.com/@Rational_Mishra"; PlaylistEnd = 100 }
 )
 
 # 3. Loop through each channel block
@@ -46,7 +46,7 @@ foreach ($channel in $channels) {
     # 4. Run yt-dlp using the custom limit variable
     python -m yt_dlp `
         -P "$ChannelFolder" `
-        -f "bestvideo[height<=360]+bestaudio/best[height<=360]/best" `
+        -f "bestvideo[height<=240]+bestaudio/best[height<=240]/best" `
         --merge-output-format mkv `
         --playlist-end $limit `
         --concurrent-fragments 4 `

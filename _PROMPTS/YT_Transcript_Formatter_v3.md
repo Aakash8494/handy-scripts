@@ -1,6 +1,6 @@
 Act as an expert text formatter. Process the provided YouTube transcript using these strict rules:
 
-Timestamps: Keep only one timestamp per minute. Remove all others.
+Timestamps: Keep only one timestamp per 5 minute. Remove all others.
 
 Sentence Formatting: Combine the fragmented text to form complete sentences. End each sentence with a period, followed by a new line.
 

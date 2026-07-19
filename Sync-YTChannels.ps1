@@ -3,10 +3,9 @@ $BaseDownloadFolder = "C:\Users\aakas\Downloads\YT_Downloads"
 
 # 2. List of channels with their custom playlist-end limits
 $channels = @(
-    # @{ Url = "https://rumble.com/c/TateSpeech"; PlaylistEnd = 40 },
     # @{ Url = ""; PlaylistEnd = 20 },
     # @{ Url = ""; PlaylistEnd = 20 },
-    @{ Url = "https://www.youtube.com/@Sirhud"; PlaylistEnd = 100 },
+    # @{ Url = "https://www.youtube.com/@Sirhud"; PlaylistEnd = 100 },
     # @{ Url = "https://www.youtube.com/@EntrepreneursInCars"; PlaylistEnd = 20 },
     # @{ Url = "https://www.youtube.com/@bettermanadvice"; PlaylistEnd = 20 },
     # @{ Url = "https://www.youtube.com/@KEYFACTS33"; PlaylistEnd = 10 },
@@ -15,7 +14,8 @@ $channels = @(
     # @{ Url = "https://www.youtube.com/@snagar86"; PlaylistEnd = 5 },
     # @{ Url = "https://www.youtube.com/@IronWilll2026"; PlaylistEnd = 20 }, 
     # @{ Url = "https://www.youtube.com/@XHumanBehaviour"; PlaylistEnd = 20 }
-    @{ Url = "https://www.youtube.com/@Rational_Mishra"; PlaylistEnd = 100 }
+    # @{ Url = "https://www.youtube.com/@Rational_Mishra"; PlaylistEnd = 100 }
+    @{ Url = "https://rumble.com/c/TateSpeech"; PlaylistEnd = 40 }
 )
 
 # 3. Loop through each channel block

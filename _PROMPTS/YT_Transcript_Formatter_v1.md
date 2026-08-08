@@ -10,6 +10,9 @@ Group & Headings:
 Group the sentences into logical sections when a new idea begins.
 Add a short, relevant heading above each section.
 
+Add Timestamps:
+Include the corresponding starting timestamp at the beginning of each new paragraph or section you create.
+
 Line Breaks:
 Start a new line immediately after every period (full stop). Each sentence must begin on its own distinct line.
 

@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "YouTube 2.5s Rewind",
+    "version": "1.0",
+    "description": "Press the Left Arrow key to go back 2.5 seconds instead of 5.",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.youtube.com/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}

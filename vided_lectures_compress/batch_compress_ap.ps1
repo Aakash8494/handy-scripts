@@ -1,6 +1,6 @@
 param(
-    [Parameter(Mandatory=$true)][string]$SourceDir,
-    [Parameter(Mandatory=$true)][string]$DestDir
+    [Parameter(Mandatory = $true)][string]$SourceDir,
+    [Parameter(Mandatory = $true)][string]$DestDir
 )
 
 if (-Not (Test-Path $DestDir)) {
@@ -16,6 +16,12 @@ foreach ($file in $files) {
     $outputFile = Join-Path -Path $DestDir -ChildPath $relativePath
     $outputDir = Split-Path -Path $outputFile -Parent
 
+    # Check if the compressed file already exists
+    if (Test-Path $outputFile) {
+        Write-Host "Skipping: $relativePath (already exists)" -ForegroundColor Yellow
+        continue
+    }
+
     if (-Not (Test-Path $outputDir)) {
         New-Item -ItemType Directory -Path $outputDir | Out-Null
     }
@@ -23,12 +29,12 @@ foreach ($file in $files) {
     Write-Host "Compressing: $relativePath" -ForegroundColor Cyan
     
     ffmpeg -i "$($file.FullName)" `
-           -c:v hevc_videotoolbox `
-           -r 15 `
-           -b:v 120k `
-           -c:a aac -b:a 32k -ac 1 `
-           -y `
-           "$outputFile"
+        -c:v hevc_videotoolbox `
+        -r 15 `
+        -b:v 120k `
+        -c:a aac -b:a 32k -ac 1 `
+        -y `
+        "$outputFile"
 }
 
 Write-Host "Batch compression complete!" -ForegroundColor Green

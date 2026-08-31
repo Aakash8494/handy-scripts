@@ -1,7 +1,13 @@
 param(
     [Parameter(Mandatory = $true)][string]$SourceDir,
-    [Parameter(Mandatory = $true)][string]$DestDir
+    [Parameter(Mandatory = $true)][string]$DestDir,
+    [Parameter(Mandatory = $false)][string]$LogFile
 )
+
+# Set default log file path if none is provided
+if (-Not $LogFile) {
+    $LogFile = Join-Path -Path $DestDir -ChildPath "failed_compressions.txt"
+}
 
 # Set console encoding to UTF-8 to properly display Hindi characters
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
@@ -9,6 +15,10 @@ param(
 if (-Not (Test-Path $DestDir)) {
     New-Item -ItemType Directory -Path $DestDir | Out-Null
 }
+
+# Initialize/touch the log file with a header for this run
+$runStartTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+Add-Content -Path $LogFile -Value "`n--- New Compression Run Started at $runStartTime ---"
 
 # Sort-Object ensures files are processed alphabetically
 $files = Get-ChildItem -Path $SourceDir -Filter "*.mp4" -Recurse | Sort-Object -Property FullName
@@ -48,15 +58,21 @@ foreach ($file in $files) {
     if ($LASTEXITCODE -eq 0 -and (Test-Path $outputFile)) {
         Write-Host "Compression successful. Deleting original: $($file.Name)" -ForegroundColor Green
         Remove-Item -Path $file.FullName -Force
-    } else {
+    }
+    else {
         Write-Host "Error or interruption during compression of $($file.Name). Original file kept." -ForegroundColor Red
+        
+        # LOGGING FAILURE
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $errorMessage = "[$timestamp] FAILED: $($file.FullName)"
+        Add-Content -Path $LogFile -Value $errorMessage
     }
 }
 
 Write-Host "Scanning for empty folders to clean up..." -ForegroundColor Cyan
 
 # Get all directories in the source, sorting by path length descending (deepest folders first)
-$folders = Get-ChildItem -Path $SourceDir -Directory -Recurse | Sort-Object -Property @{Expression={$_.FullName.Length};Descending=$true}
+$folders = Get-ChildItem -Path $SourceDir -Directory -Recurse | Sort-Object -Property @{Expression = { $_.FullName.Length }; Descending = $true }
 
 foreach ($folder in $folders) {
     # Check if the folder is completely empty (including hidden files)
@@ -67,4 +83,4 @@ foreach ($folder in $folders) {
     }
 }
 
-Write-Host "Batch compression and cleanup complete!" -ForegroundColor Green
+Write-Host "Batch compression and cleanup complete! Check $LogFile for any errors." -ForegroundColor Green

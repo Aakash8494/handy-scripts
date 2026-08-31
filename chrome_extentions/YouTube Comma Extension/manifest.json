@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "YouTube 2.5s Rewind",
-    "version": "1.0",
-    "description": "Press the Left Arrow key to go back 2.5 seconds instead of 5.",
+    "name": "YouTube 2.5s Seek",
+    "version": "1.1",
+    "description": "Press the Left or Right Arrow keys to jump 2.5 seconds instead of 5.",
     "content_scripts": [
         {
             "matches": [

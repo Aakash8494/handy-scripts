@@ -108,3 +108,6 @@ foreach ($folder in $folders) {
 }
 
 Write-Host "Batch compression and cleanup complete! Check $LogFile for any errors." -ForegroundColor Green
+
+
+##./batch_compress_ap.ps1 -SourceDir "/Users/aakashjadhav/Downloads/40" -DestDir "/Users/aakashjadhav/Downloads/40 compressed"

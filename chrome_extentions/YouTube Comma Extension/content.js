@@ -17,11 +17,11 @@ document.addEventListener('keydown', function (e) {
         return;
     }
 
-    // List of keys we want to override (Added z, x, v for playback speeds)
+    // List of keys we want to override (Removed spacebar so YouTube can handle it naturally)
     const activeKeys = [
         'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
         'z', 'Z', 'x', 'X', 'c', 'C', 'v', 'V',
-        ' ', 'p', 'P'
+        'p', 'P'
     ];
 
     if (!activeKeys.includes(e.key)) return;
@@ -35,7 +35,7 @@ document.addEventListener('keydown', function (e) {
 
     // Configuration settings
     const SEEK_STEP = 2.5;
-    const VOLUME_STEP = 0.05;
+    const VOLUME_STEP = 0.10; // Increased from 0.05 (5%) to 0.10 (10%)
 
     // Execute actions based on the key pressed
     switch (e.key) {
@@ -69,14 +69,6 @@ document.addEventListener('keydown', function (e) {
         // --- Toggles ---
         case 'p': case 'P':
             document.body.classList.toggle('show-persistent-progress');
-            break;
-
-        case ' ': // Restoring spacebar functionality since default was prevented
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
             break;
     }
 }, true);

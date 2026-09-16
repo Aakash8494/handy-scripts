@@ -1,5 +1,4 @@
 // --- 1. Toggleable Progress Bar CSS ---
-// We inject a style that only works when the body has our custom class
 const style = document.createElement('style');
 style.textContent = `
     body.show-persistent-progress .html5-video-player.ytp-autohide .ytp-chrome-bottom {
@@ -18,8 +17,12 @@ document.addEventListener('keydown', function (e) {
         return;
     }
 
-    // List of keys we want to override (Added 'p' and 'P' for the progress bar toggle)
-    const activeKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'c', 'C', ' ', 'p', 'P'];
+    // List of keys we want to override (Added z, x, v for playback speeds)
+    const activeKeys = [
+        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+        'z', 'Z', 'x', 'X', 'c', 'C', 'v', 'V',
+        ' ', 'p', 'P'
+    ];
 
     if (!activeKeys.includes(e.key)) return;
 
@@ -48,13 +51,32 @@ document.addEventListener('keydown', function (e) {
         case 'ArrowDown':
             video.volume = Math.max(0.0, video.volume - VOLUME_STEP);
             break;
-        case 'c':
-        case 'C':
-            video.playbackRate = video.playbackRate === 2.0 ? 1.0 : 2.0;
+
+        // --- Playback Speed Controls ---
+        case 'z': case 'Z':
+            video.playbackRate = 1.0;
             break;
-        case 'p': // Toggle Progress Bar
-        case 'P':
+        case 'x': case 'X':
+            video.playbackRate = 1.25;
+            break;
+        case 'c': case 'C':
+            video.playbackRate = 1.5;
+            break;
+        case 'v': case 'V':
+            video.playbackRate = 2.0;
+            break;
+
+        // --- Toggles ---
+        case 'p': case 'P':
             document.body.classList.toggle('show-persistent-progress');
+            break;
+
+        case ' ': // Restoring spacebar functionality since default was prevented
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
             break;
     }
 }, true);

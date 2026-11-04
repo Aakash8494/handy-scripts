@@ -1,14 +1,17 @@
+# Define your target directory path here
+$targetDirectory = "/Users/aakashjadhav/Movies"
+
 # Define the video extensions you want to process
 $videoExtensions = @('.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv', '.webm', '.m4v')
 
-# 1. Create an output folder in the current directory
-$outputFolder = Join-Path "." "BlackVideos"
+# 1. Create an output folder inside the target directory
+$outputFolder = Join-Path $targetDirectory "BlackVideos"
 if (-not (Test-Path $outputFolder)) {
     New-Item -ItemType Directory -Path $outputFolder | Out-Null
 }
 
-# 2. Get all video files in the current directory matching the extensions
-$files = Get-ChildItem -File | Where-Object { $_.Extension.ToLower() -in $videoExtensions }
+# 2. Get all video files in the target directory matching the extensions
+$files = Get-ChildItem -Path $targetDirectory -File | Where-Object { $_.Extension.ToLower() -in $videoExtensions }
 
 # 3. Loop through and process each file
 foreach ($file in $files) {

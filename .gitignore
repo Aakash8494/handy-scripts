@@ -42,3 +42,6 @@ src/youtube_transcript_download/*
 
 *.mp4
 *.mkv
+*.part
+*.ytdl
+*Frag*

@@ -1,43 +1,75 @@
 import os
+import time
 import yt_dlp
 from dotenv import load_dotenv
+from yt_dlp.utils import DownloadError
 
-# Load variables from the .env file in the same directory
 load_dotenv()
 
-def download_master_playlist(url: str, output_path: str, connections: int = 8) -> None:
-    """
-    Downloads a master m3u8 playlist, extracting the 240p video and best audio.
-    """
-    print(f"[*] Downloading {output_path} at 240p (Using {connections} connections)...")
-    ydl_opts = {
-        'outtmpl': output_path,
-        'concurrent_fragment_downloads': connections,
-        # Grabs best video up to 240p + best audio, or best combined format up to 240p
-        'format': 'bestvideo[height<=240]+bestaudio/best[height<=240]',
-        'merge_output_format': 'mp4', # Ensures the final container is MP4
-        'quiet': False,
-        'no_warnings': True,
-    }
-    
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
 
-def main():
-    # Fetch URL and config from the .env file
-    PLAYLIST_URL = os.getenv("PLAYLIST_URL")
-    FINAL_OUTPUT_NAME = os.getenv("FINAL_OUTPUT_NAME", "output.mp4")
-    
-    if not PLAYLIST_URL:
-        print("[-] Error: PLAYLIST_URL is missing from the .env file.")
-        return
+def download_master_playlist(
+    url: str,
+    output_path: str,
+    connections: int = 1,
+    attempts: int = 3,
+) -> None:
+    """Download a playlist at up to 240p, retrying failed fragments and attempts."""
+
+    ydl_opts = {
+        "outtmpl": output_path,
+        "format": "bestvideo[height<=240]+bestaudio/best[height<=240]",
+        "merge_output_format": "mp4",
+
+        # Lower concurrency can help with unstable HLS hosts.
+        "concurrent_fragment_downloads": connections,
+
+        # Retry network requests, fragments, and extraction.
+        "retries": 10,
+        "fragment_retries": 20,
+        "extractor_retries": 5,
+        "socket_timeout": 30,
+
+        # Fail clearly if fragments remain unavailable after retries.
+        "abort_on_unavailable_fragments": True,
+
+        "quiet": False,
+        "no_warnings": False,
+    }
+
+    for attempt in range(1, attempts + 1):
+        print(f"[*] Download attempt {attempt}/{attempts}: {output_path}")
+
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+            return
+        except DownloadError as exc:
+            if attempt == attempts:
+                raise
+            delay = min(10 * attempt, 30)
+            print(f"[-] Download failed: {exc}")
+            print(f"[*] Retrying in {delay} seconds...")
+            time.sleep(delay)
+
+
+def main() -> None:
+    playlist_url = os.getenv("PLAYLIST_URL")
+    output_name = os.getenv("FINAL_OUTPUT_NAME", "output.mp4")
+
+    if not playlist_url:
+        raise SystemExit("PLAYLIST_URL is missing from the .env file.")
 
     try:
-        download_master_playlist(PLAYLIST_URL, FINAL_OUTPUT_NAME, connections=8)
-        print(f"[+] Success! Final video saved as '{FINAL_OUTPUT_NAME}'")
+        download_master_playlist(
+            playlist_url,
+            output_name,
+            connections=1,
+            attempts=3,
+        )
+        print(f"[+] Download finished: {output_name}")
+    except DownloadError as exc:
+        raise SystemExit(f"[-] Download failed after retries: {exc}") from exc
 
-    except Exception as e:
-        print(f"[-] An error occurred during the process: {e}")
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,5 @@
 # Define your target directory path here
-$targetDirectory = "/Users/aakashjadhav/Movies"
+$targetDirectory = '/Users/aakashjadhav/Documents/COURSES/sirhud/_MAIN/6. Masculinity'
 
 # Define the video extensions you want to process
 $videoExtensions = @('.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv', '.webm', '.m4v')
